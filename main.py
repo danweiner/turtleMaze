@@ -1,3 +1,5 @@
+import turtle
+
 def searchFrom(maze, startRow, startColumn):
   maze.updatePosition(startRow, startColumn)
   # Check for base cases
@@ -48,8 +50,41 @@ lines = mazeFile.split('\n')
 for line in lines:
   if line:
     print(line)
-long_s = '''
-hello
-'''
 
-  
+
+class Maze:
+  def __init__(self, mazeFile):
+    rowsInMaze = 0
+    columnsInMaze = 0
+    self.mazeList = []
+    lines = mazeFile.split('\n')
+    
+    for line in lines:
+      rowList = []
+      col = 0
+      for ch in line:
+        rowList.append(ch)
+        if ch == 'S':
+          self.startRow = rowsInMaze
+          self.startCol = col
+        col += 1
+      
+      if rowList:
+        self.mazeList.append(rowList)
+        columnsInMaze = len(rowList)
+        rowsInMaze += 1
+
+    self.rowsInMaze = rowsInMaze
+    self.columnsInMaze = columnsInMaze
+    self.xTranslate = -columnsInMaze/2
+    self.yTranslate = rowsInMaze/2
+    # self.t = turtle.Turtle()
+    # self.t.shape('turtle')
+    # self.wn = turtle.Screen()
+    # self.wn.setworldcoordinates(-(columnsInMaze-1)/2-.5, -(rowsInMaze-1)/2-.5, (columnsInMaze-1)/2+.5, (rowsInMaze-1)/2+.5) 
+
+
+myMaze = Maze(mazeFile)
+print(myMaze.mazeList)
+print(myMaze.rowsInMaze)
+print(myMaze.columnsInMaze)
